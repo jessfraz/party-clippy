@@ -31,12 +31,12 @@ const (
 
 var (
 	colorOptions = []*color.Color{
-		color.New(color.FgHiRed),
-		color.New(color.FgHiGreen),
-		color.New(color.FgHiYellow),
-		color.New(color.FgHiBlue),
-		color.New(color.FgHiMagenta),
-		color.New(color.FgHiCyan),
+		color.New(color.FgRed),
+		color.New(color.FgGreen),
+		color.New(color.FgYellow),
+		color.New(color.FgBlue),
+		color.New(color.FgMagenta),
+		color.New(color.FgCyan),
 	}
 )
 
@@ -53,7 +53,7 @@ func main() {
 			if f, ok := w.(http.Flusher); ok {
 				f.Flush()
 			}
-			time.Sleep(time.Second / 4)
+			time.Sleep(time.Second / 6)
 			if i == len(colorOptions)-1 {
 				i = 0
 				continue
