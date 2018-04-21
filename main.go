@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"log"
 	"net/http"
+	"time"
 
 	"github.com/fatih/color"
 )
@@ -42,12 +43,17 @@ var (
 func main() {
 	mux := http.NewServeMux()
 	mux.HandleFunc("/", func(w http.ResponseWriter, req *http.Request) {
+		// Go to top of terminal and clear
 		i := 0
 		for i < len(colorOptions) {
 			// Clear the terminal.
-			fmt.Fprintf(w, "\033[2J")
+			fmt.Fprintf(w, "\033c")
 			// Print clippy with a color.
 			colorOptions[i].Fprintf(w, clippy)
+			if f, ok := w.(http.Flusher); ok {
+				f.Flush()
+			}
+			time.Sleep(time.Second / 4)
 			if i == len(colorOptions)-1 {
 				i = 0
 				continue
