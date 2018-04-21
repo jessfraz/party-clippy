@@ -4,21 +4,27 @@ import (
 	"fmt"
 	"log"
 	"net/http"
-	"strings"
 
 	"github.com/fatih/color"
 )
 
 const (
 	clippy = `
- __
-/  \        _____________
-|  |       /             \
-@  @       | Hello       |
-|| ||      | //Build     |
-|| ||   <--| Containers  |
-|\_/|      | rule!       |
-\___/      \_____________/
+ _________________________________
+/ It looks like you're building a \
+\ microservice.                   /
+ ---------------------------------
+ \
+  \
+     __
+    /  \
+    |  |
+    @  @
+    |  |
+    || |/
+    || ||
+    |\_/|
+    \___/
 `
 )
 
@@ -36,21 +42,11 @@ var (
 func main() {
 	mux := http.NewServeMux()
 	mux.HandleFunc("/", func(w http.ResponseWriter, req *http.Request) {
-		// The "/" pattern matches everything, so we need to check
-		// that we're at the root here.
-		quote := strings.Trim(req.URL.Path, "/")
-		if quote == "" {
-			quote = "Hello //Build!"
-		}
-
-		userAgent := req.Header.Get("user-agent")
-		if strings.Contains(userAgent, "curl") {
-			// we have a request from curl
-		}
-
 		i := 0
 		for i < len(colorOptions) {
-			fmt.Fprintf(w, "\033[H")
+			// Clear the terminal.
+			fmt.Fprintf(w, "\033[2J")
+			// Print clippy with a color.
 			colorOptions[i].Fprintf(w, clippy)
 			if i == len(colorOptions)-1 {
 				i = 0
