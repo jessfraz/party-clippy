@@ -2,8 +2,6 @@
 
 [![Travis CI](https://travis-ci.org/jessfraz/party-clippy.svg?branch=master)](https://travis-ci.org/jessfraz/party-clippy)
 
-{DESCRIPTION}
-
 ## Installation
 
 #### Binaries
@@ -13,3 +11,13 @@
 - **linux** [386](https://github.com/jessfraz/party-clippy/releases/download/v0.0.0/party-clippy-linux-386) / [amd64](https://github.com/jessfraz/party-clippy/releases/download/v0.0.0/party-clippy-linux-amd64) / [arm](https://github.com/jessfraz/party-clippy/releases/download/v0.0.0/party-clippy-linux-arm) / [arm64](https://github.com/jessfraz/party-clippy/releases/download/v0.0.0/party-clippy-linux-arm64)
 - **solaris** [amd64](https://github.com/jessfraz/party-clippy/releases/download/v0.0.0/party-clippy-solaris-amd64)
 - **windows** [386](https://github.com/jessfraz/party-clippy/releases/download/v0.0.0/party-clippy-windows-386) / [amd64](https://github.com/jessfraz/party-clippy/releases/download/v0.0.0/party-clippy-windows-amd64)
+
+#### Run in Docker
+
+```console
+$ docker run -d \
+    --name clippy \
+    -t \ # need the tty for colors
+    -p 8080:8080 \
+    r.j3ss.co/party-clippy -d
+```
