@@ -1,35 +1,33 @@
 package main
 
 import (
+	"flag"
 	"fmt"
-	"log"
 	"net/http"
+	"os"
+	"os/signal"
+	"syscall"
 	"time"
 
 	"github.com/fatih/color"
+	"github.com/jessfraz/party-clippy/version"
+	"github.com/sirupsen/logrus"
 )
 
 const (
-	clippy = `
- _________________________________
-/ It looks like you're building a \
-\ microservice.                   /
- ---------------------------------
- \
-  \
-     __
-    /  \
-    |  |
-    @  @
-    |  |
-    || |/
-    || ||
-    |\_/|
-    \___/
+	// BANNER is what is printed for help/info output.
+	BANNER = `party-clippy
+
+  version: %s
 `
 )
 
 var (
+	port int
+
+	debug bool
+	vrsn  bool
+
 	colorOptions = []*color.Color{
 		color.New(color.FgRed),
 		color.New(color.FgGreen),
@@ -40,16 +38,69 @@ var (
 	}
 )
 
+func init() {
+	// parse flags
+	flag.IntVar(&port, "port", 8080, "port for the server to listen on")
+	flag.IntVar(&port, "p", 8080, "port for the server to listen on (shorthand)")
+
+	flag.BoolVar(&vrsn, "version", false, "print version and exit")
+	flag.BoolVar(&vrsn, "v", false, "print version and exit (shorthand)")
+	flag.BoolVar(&debug, "d", false, "run in debug mode")
+
+	flag.Usage = func() {
+		fmt.Fprint(os.Stderr, fmt.Sprintf(BANNER, version.VERSION))
+		flag.PrintDefaults()
+	}
+
+	flag.Parse()
+
+	if vrsn {
+		fmt.Printf("party-clippy version %s, build %s", version.VERSION, version.GITCOMMIT)
+		os.Exit(0)
+	}
+
+	if flag.NArg() >= 1 {
+		// parse the arg
+		arg := flag.Args()[0]
+
+		if arg == "help" {
+			usageAndExit("", 0)
+		}
+
+		if arg == "version" {
+			fmt.Printf("party-clippy version %s, build %s", version.VERSION, version.GITCOMMIT)
+			os.Exit(0)
+		}
+	}
+
+	// set log level
+	if debug {
+		logrus.SetLevel(logrus.DebugLevel)
+	}
+}
+
 func main() {
+	// On ^C, or SIGTERM handle exit.
+	c := make(chan os.Signal, 1)
+	signal.Notify(c, os.Interrupt)
+	signal.Notify(c, syscall.SIGTERM)
+	go func() {
+		for sig := range c {
+			logrus.Infof("Received %s, exiting.", sig.String())
+			os.Exit(0)
+		}
+	}()
+
 	mux := http.NewServeMux()
-	mux.HandleFunc("/", func(w http.ResponseWriter, req *http.Request) {
-		// Go to top of terminal and clear
+
+	// Define bburns easter egg handler.
+	mux.HandleFunc("/bburns", func(w http.ResponseWriter, req *http.Request) {
 		i := 0
 		for i < len(colorOptions) {
 			// Clear the terminal.
-			fmt.Fprintf(w, "\033c")
+			fmt.Fprint(w, "\033c")
 			// Print clippy with a color.
-			colorOptions[i].Fprintf(w, clippy)
+			colorOptions[i].Fprint(w, bburns)
 			if f, ok := w.(http.Flusher); ok {
 				f.Flush()
 			}
@@ -62,5 +113,35 @@ func main() {
 		}
 	})
 
-	log.Fatal(http.ListenAndServe(":8080", mux))
+	// Define wildcard/root handler.
+	mux.HandleFunc("/", func(w http.ResponseWriter, req *http.Request) {
+		i := 0
+		for i < len(colorOptions) {
+			// Clear the terminal.
+			fmt.Fprint(w, "\033c")
+			// Print clippy with a color.
+			colorOptions[i].Fprint(w, clippyBlurb+wiggle(i))
+			if f, ok := w.(http.Flusher); ok {
+				f.Flush()
+			}
+			time.Sleep(time.Second / 6)
+			if i == len(colorOptions)-1 {
+				i = 0
+				continue
+			}
+			i++
+		}
+	})
+
+	logrus.Fatal(http.ListenAndServe(fmt.Sprintf(":%d", port), mux))
+}
+
+func usageAndExit(message string, exitCode int) {
+	if message != "" {
+		fmt.Fprintf(os.Stderr, message)
+		fmt.Fprintf(os.Stderr, "\n\n")
+	}
+	flag.Usage()
+	fmt.Fprintf(os.Stderr, "\n")
+	os.Exit(exitCode)
 }
