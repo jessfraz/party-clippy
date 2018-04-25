@@ -113,8 +113,8 @@ func main() {
 		}
 	})
 
-	// Define wildcard/root handler.
-	mux.HandleFunc("/", func(w http.ResponseWriter, req *http.Request) {
+	// Define party easter egg handler.
+	mux.HandleFunc("/party", func(w http.ResponseWriter, req *http.Request) {
 		i := 0
 		for i < len(colorOptions) {
 			// Clear the terminal.
@@ -131,6 +131,11 @@ func main() {
 			}
 			i++
 		}
+	})
+
+	// Define wildcard/root handler.
+	mux.HandleFunc("/", func(w http.ResponseWriter, req *http.Request) {
+		fmt.Fprint(w, clippyBlurb+clippyBody0)
 	})
 
 	logrus.Fatal(http.ListenAndServe(fmt.Sprintf(":%d", port), mux))
