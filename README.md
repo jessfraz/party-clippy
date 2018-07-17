@@ -1,16 +1,17 @@
 # party-clippy
 
-[![Travis CI](https://travis-ci.org/jessfraz/party-clippy.svg?branch=master)](https://travis-ci.org/jessfraz/party-clippy)
+[![Travis CI](https://img.shields.io/travis/jessfraz/party-clippy.svg?style=for-the-badge)](https://travis-ci.org/jessfraz/party-clippy)
+[![GoDoc](https://img.shields.io/badge/godoc-reference-5272B4.svg?style=for-the-badge)](https://godoc.org/github.com/jessfraz/party-clippy)
+
+ * [Installation](README.md#installation)
+      * [Binaries](README.md#binaries)
+      * [Run in Docker](README.md#run-in-docker)<Paste>
 
 ## Installation
 
 #### Binaries
 
-- **darwin** [386](https://github.com/jessfraz/party-clippy/releases/download/v0.2.1/party-clippy-darwin-386) / [amd64](https://github.com/jessfraz/party-clippy/releases/download/v0.2.1/party-clippy-darwin-amd64)
-- **freebsd** [386](https://github.com/jessfraz/party-clippy/releases/download/v0.2.1/party-clippy-freebsd-386) / [amd64](https://github.com/jessfraz/party-clippy/releases/download/v0.2.1/party-clippy-freebsd-amd64)
-- **linux** [386](https://github.com/jessfraz/party-clippy/releases/download/v0.2.1/party-clippy-linux-386) / [amd64](https://github.com/jessfraz/party-clippy/releases/download/v0.2.1/party-clippy-linux-amd64) / [arm](https://github.com/jessfraz/party-clippy/releases/download/v0.2.1/party-clippy-linux-arm) / [arm64](https://github.com/jessfraz/party-clippy/releases/download/v0.2.1/party-clippy-linux-arm64)
-- **solaris** [amd64](https://github.com/jessfraz/party-clippy/releases/download/v0.2.1/party-clippy-solaris-amd64)
-- **windows** [386](https://github.com/jessfraz/party-clippy/releases/download/v0.2.1/party-clippy-windows-386) / [amd64](https://github.com/jessfraz/party-clippy/releases/download/v0.2.1/party-clippy-windows-amd64)
+For installation instructions from binaries please visit the [Releases Page](https://github.com/jessfraz/party-clippy/releases).
 
 #### Run in Docker
 

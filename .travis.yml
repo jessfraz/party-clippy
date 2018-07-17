@@ -18,39 +18,39 @@ jobs:
       deploy:
         provider: releases
         file:
-          - cross/party-clippy-linux-amd64.md5
-          - cross/party-clippy-windows-386.sha256
-          - cross/party-clippy-linux-arm
-          - cross/party-clippy-darwin-amd64.md5
           - cross/party-clippy-darwin-amd64
-          - cross/party-clippy-solaris-amd64.md5
-          - cross/party-clippy-linux-arm64.sha256
-          - cross/party-clippy-linux-arm.sha256
-          - cross/party-clippy-linux-386.sha256
+          - cross/party-clippy-darwin-amd64.md5
+          - cross/party-clippy-darwin-amd64.sha256
+          - cross/party-clippy-darwin-386
           - cross/party-clippy-darwin-386.md5
-          - cross/party-clippy-windows-386.md5
+          - cross/party-clippy-darwin-386.sha256
+          - cross/party-clippy-freebsd-amd64
           - cross/party-clippy-freebsd-amd64.md5
-          - cross/party-clippy-linux-arm64.md5
-          - cross/party-clippy-linux-arm64
           - cross/party-clippy-freebsd-amd64.sha256
-          - cross/party-clippy-freebsd-386.md5
-          - cross/party-clippy-linux-amd64.sha256
-          - cross/party-clippy-linux-386.md5
           - cross/party-clippy-freebsd-386
+          - cross/party-clippy-freebsd-386.md5
+          - cross/party-clippy-freebsd-386.sha256
+          - cross/party-clippy-linux-arm
+          - cross/party-clippy-linux-arm.md5
+          - cross/party-clippy-linux-arm.sha256
+          - cross/party-clippy-linux-arm64
+          - cross/party-clippy-linux-arm64.md5
+          - cross/party-clippy-linux-arm64.sha256
+          - cross/party-clippy-linux-amd64
+          - cross/party-clippy-linux-amd64.md5
+          - cross/party-clippy-linux-amd64.sha256
+          - cross/party-clippy-linux-386
+          - cross/party-clippy-linux-386.md5
+          - cross/party-clippy-linux-386.sha256
+          - cross/party-clippy-solaris-amd64
+          - cross/party-clippy-solaris-amd64.md5
           - cross/party-clippy-solaris-amd64.sha256
           - cross/party-clippy-windows-amd64
           - cross/party-clippy-windows-amd64.md5
           - cross/party-clippy-windows-amd64.sha256
-          - cross/party-clippy-linux-arm.md5
-          - cross/party-clippy-darwin-386.sha256
-          - cross/party-clippy-darwin-amd64.sha256
           - cross/party-clippy-windows-386
-          - cross/party-clippy-solaris-amd64
-          - cross/party-clippy-darwin-386
-          - cross/party-clippy-linux-386
-          - cross/party-clippy-freebsd-amd64
-          - cross/party-clippy-freebsd-386.sha256
-          - cross/party-clippy-linux-amd64
+          - cross/party-clippy-windows-386.md5
+          - cross/party-clippy-windows-386.sha256
         skip_cleanup: true
         on:
           tags: true
