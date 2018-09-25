@@ -1,10 +1,13 @@
 # party-clippy
 
-[![Travis CI](https://travis-ci.org/jessfraz/party-clippy.svg?branch=master)](https://travis-ci.org/jessfraz/party-clippy)
+[![Travis CI](https://img.shields.io/travis/jessfraz/party-clippy.svg?style=for-the-badge)](https://travis-ci.org/jessfraz/party-clippy)
+[![GoDoc](https://img.shields.io/badge/godoc-reference-5272B4.svg?style=for-the-badge)](https://godoc.org/github.com/jessfraz/party-clippy)
 
 ## Installation
 
 #### Binaries
+
+For installation instructions from binaries please visit the [Releases Page](https://github.com/jessfraz/party-clippy/releases).
 
 - **darwin** [386](https://github.com/jessfraz/party-clippy/releases/download/v0.2.1/party-clippy-darwin-386) / [amd64](https://github.com/jessfraz/party-clippy/releases/download/v0.2.1/party-clippy-darwin-amd64)
 - **freebsd** [386](https://github.com/jessfraz/party-clippy/releases/download/v0.2.1/party-clippy-freebsd-386) / [amd64](https://github.com/jessfraz/party-clippy/releases/download/v0.2.1/party-clippy-freebsd-amd64)
