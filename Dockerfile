@@ -29,4 +29,3 @@ COPY --from=builder /usr/bin/party-clippy /usr/bin/party-clippy
 COPY --from=builder /etc/ssl/certs/ /etc/ssl/certs
 
 ENTRYPOINT [ "party-clippy" ]
-CMD [ "--help" ]
