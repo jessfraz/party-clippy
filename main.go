@@ -6,6 +6,7 @@ import (
 	"net/http"
 	"os"
 	"os/signal"
+	"strings"
 	"syscall"
 	"time"
 
@@ -113,14 +114,14 @@ func main() {
 		}
 	})
 
-	// Define party easter egg handler.
-	mux.HandleFunc("/party", func(w http.ResponseWriter, req *http.Request) {
+	// Define octocat easter egg handler.
+	mux.HandleFunc("/octocat", func(w http.ResponseWriter, req *http.Request) {
 		i := 0
 		for i < len(colorOptions) {
 			// Clear the terminal.
 			fmt.Fprint(w, "\033c")
 			// Print clippy with a color.
-			colorOptions[i].Fprint(w, clippyBlurb+wiggle(i))
+			colorOptions[i].Fprint(w, octocat)
 			if f, ok := w.(http.Flusher); ok {
 				f.Flush()
 			}
@@ -133,12 +134,40 @@ func main() {
 		}
 	})
 
+	// Define party easter egg handler.
+	mux.HandleFunc("/party", partyHandler)
+
 	// Define wildcard/root handler.
 	mux.HandleFunc("/", func(w http.ResponseWriter, req *http.Request) {
-		fmt.Fprint(w, clippyBlurb+clippyBody0)
+		if !strings.HasPrefix(req.UserAgent(), "curl") {
+			fmt.Fprint(w, clippyBlurb+clippyBody0)
+			return
+		}
+
+		// Do the party handler if it's from curl.
+		partyHandler(w, req)
 	})
 
 	logrus.Fatal(http.ListenAndServe(fmt.Sprintf(":%d", port), mux))
+}
+
+func partyHandler(w http.ResponseWriter, req *http.Request) {
+	i := 0
+	for i < len(colorOptions) {
+		// Clear the terminal.
+		fmt.Fprint(w, "\033c")
+		// Print clippy with a color.
+		colorOptions[i].Fprint(w, clippyBlurb+wiggle(i))
+		if f, ok := w.(http.Flusher); ok {
+			f.Flush()
+		}
+		time.Sleep(time.Second / 6)
+		if i == len(colorOptions)-1 {
+			i = 0
+			continue
+		}
+		i++
+	}
 }
 
 func usageAndExit(message string, exitCode int) {
