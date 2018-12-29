@@ -7,6 +7,10 @@
 
 <!-- toc -->
 
+- [Installation](#installation)
+    + [Binaries](#binaries)
+    + [Run in Docker](#run-in-docker)
+
 <!-- tocstop -->
 
 ## Installation
