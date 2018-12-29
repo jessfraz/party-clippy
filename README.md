@@ -3,6 +3,12 @@
 [![Travis CI](https://img.shields.io/travis/jessfraz/party-clippy.svg?style=for-the-badge)](https://travis-ci.org/jessfraz/party-clippy)
 [![GoDoc](https://img.shields.io/badge/godoc-reference-5272B4.svg?style=for-the-badge)](https://godoc.org/github.com/jessfraz/party-clippy)
 
+**Table of Contents**
+
+<!-- toc -->
+
+<!-- tocstop -->
+
 ## Installation
 
 #### Binaries
