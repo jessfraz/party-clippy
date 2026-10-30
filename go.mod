@@ -1,5 +1,7 @@
 module github.com/jessfraz/party-clippy
 
+go 1.17
+
 require (
 	github.com/fatih/color v1.7.0
 	github.com/sirupsen/logrus v1.0.5
