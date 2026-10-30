@@ -49,7 +49,7 @@ func init() {
 	flag.BoolVar(&debug, "d", false, "run in debug mode")
 
 	flag.Usage = func() {
-		fmt.Fprint(os.Stderr, fmt.Sprintf(BANNER, version.VERSION))
+		fmt.Fprintf(os.Stderr, BANNER, version.VERSION)
 		flag.PrintDefaults()
 	}
 
@@ -65,7 +65,9 @@ func init() {
 		arg := flag.Args()[0]
 
 		if arg == "help" {
-			usageAndExit("", 0)
+			flag.Usage()
+			fmt.Fprintln(os.Stderr)
+			os.Exit(0)
 		}
 
 		if arg == "version" {
@@ -168,14 +170,4 @@ func partyHandler(w http.ResponseWriter, req *http.Request) {
 		}
 		i++
 	}
-}
-
-func usageAndExit(message string, exitCode int) {
-	if message != "" {
-		fmt.Fprintf(os.Stderr, message)
-		fmt.Fprintf(os.Stderr, "\n\n")
-	}
-	flag.Usage()
-	fmt.Fprintf(os.Stderr, "\n")
-	os.Exit(exitCode)
 }
